@@ -1,0 +1,13 @@
+# Ignore config files containing sensitive data
+config/db.php
+
+# Ignore logs and cache files
+*.log
+*.cache
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore XAMPP-specific folders (if applicable)
+/xampp/
