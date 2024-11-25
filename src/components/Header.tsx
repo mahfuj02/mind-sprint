@@ -1,6 +1,7 @@
 import React from "react";
 import { Sun, Moon } from "lucide-react";
-import Logo from '../assets/mindsprint-logo.svg';  // Adjust the path according to your project structure
+import darkLogo from '../assets/dark-mode-logo.svg';  // Adjust the path according to your project structure
+import lightLogo from '../assets/light-mode-logo.svg';  // Adjust the path according to your project structure
 
 interface HeaderProps {
   isDarkMode: boolean;
@@ -21,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
         <div className="flex items-center flex-shrink-0">
           <a href="/" className="flex items-center">
             <img 
-              src={Logo} 
+              src={isDarkMode?darkLogo:lightLogo} 
               alt="MindSprint Logo" 
               className="h-12 w-auto"
             />
