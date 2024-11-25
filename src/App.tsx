@@ -13,9 +13,7 @@ const App: React.FC = () => {
         <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
         <main className="bg-lightMainBg dark:bg-darkMainBg min-h-screen">
           <Routes>
-            <Route path="/" element={<Home isDarkMode={isDarkMode} toggleTheme={function (): void {
-              throw new Error("Function not implemented.");
-            } } />} />
+            <Route path="/" element={<Home isDarkMode={isDarkMode} />} />
           </Routes>
         </main>
       </div>

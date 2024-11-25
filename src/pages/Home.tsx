@@ -1,15 +1,18 @@
 import React from "react";
 import HeroSection from "../components/home/HeroSection";
+import FeaturedCourses from "../components/home/FeatureCourser";
+import InstructorProfile from "../components/home/InstructorProfile";
 interface HeaderProps {
   isDarkMode: boolean;
-  toggleTheme: () => void;
 }
 const Home: React.FC<HeaderProps> = ({isDarkMode}) => {
   return (
     <div  className= {`container mx-auto py-8 ${
         isDarkMode ? " text-white" : "text-black"
       }`} >
-      <HeroSection />
+      <HeroSection isDarkMode={isDarkMode} />
+      <FeaturedCourses isDarkMode={isDarkMode}/>
+      <InstructorProfile isDarkMode={isDarkMode} />
     </div>
   );
 };
