@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import { useTheme } from "./theme";
+import Footer from "./components/Footer";
 
 const App: React.FC = () => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -16,6 +17,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home isDarkMode={isDarkMode} />} />
           </Routes>
         </main>
+        <Footer isDarkMode={isDarkMode} />
       </div>
     </Router>
   );

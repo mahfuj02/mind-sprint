@@ -2,6 +2,7 @@ import React from "react";
 import HeroSection from "../components/home/HeroSection";
 import FeaturedCourses from "../components/home/FeatureCourser";
 import InstructorProfile from "../components/home/InstructorProfile";
+import TestimonialsSection from "../components/home/TestimonialsSection";
 interface HeaderProps {
   isDarkMode: boolean;
 }
@@ -13,6 +14,7 @@ const Home: React.FC<HeaderProps> = ({isDarkMode}) => {
       <HeroSection isDarkMode={isDarkMode} />
       <FeaturedCourses isDarkMode={isDarkMode}/>
       <InstructorProfile isDarkMode={isDarkMode} />
+      <TestimonialsSection isDarkMode={isDarkMode} />
     </div>
   );
 };
