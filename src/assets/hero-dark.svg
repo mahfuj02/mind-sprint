@@ -1,0 +1,180 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    
+    <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0"/>
+    </linearGradient>
+
+    <linearGradient id="skinTone" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8B5E3C"/>
+      <stop offset="100%" style="stop-color:#A0522D"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="600" fill="url(#bgGradient)"/>
+
+  <!-- Grid Pattern -->
+  <g stroke="#3b82f6" stroke-width="0.5" stroke-opacity="0.1">
+    <path d="M0 50 h1200 M0 100 h1200 M0 150 h1200 M0 200 h1200 M0 250 h1200 
+             M0 300 h1200 M0 350 h1200 M0 400 h1200 M0 450 h1200 M0 500 h1200"/>
+    <path d="M50 0 v600 M150 0 v600 M250 0 v600 M350 0 v600 M450 0 v600 
+             M550 0 v600 M650 0 v600 M750 0 v600 M850 0 v600 M950 0 v600"/>
+  </g>
+
+  <!-- Developer Figure -->
+  <g transform="translate(500, 200)">
+    <!-- Head -->
+    <path d="M-20,0 C-20,-20 20,-20 20,0 L20,40 L-20,40 Z" fill="url(#skinTone)"/>
+    <!-- Hair -->
+    <path d="M-25,-5 C-25,-25 25,-25 25,-5 C25,0 20,5 15,7 L-15,7 C-20,5 -25,0 -25,-5" fill="#1a1a1a"/>
+    <!-- Neck -->
+    <rect x="-10" y="40" width="20" height="15" fill="url(#skinTone)"/>
+    <!-- Body/Hoodie -->
+    <path d="M-40,55 L40,55 L45,200 L-45,200 Z" fill="#374151"/>
+    <!-- Face Features -->
+    <circle cx="-8" cy="20" r="2" fill="#1a1a1a"/>
+    <circle cx="8" cy="20" r="2" fill="#1a1a1a"/>
+    <path d="M-5,15 C-3,13 3,13 5,15" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+    <!-- Thinking Hand -->
+    <path d="M25,70 C40,65 45,75 40,85" fill="none" stroke="url(#skinTone)" stroke-width="8"/>
+  </g>
+
+  <!-- Main Content Area -->
+  <g transform="translate(100, 50)">
+    <!-- Central Monitor -->
+    <g>
+      <rect x="300" y="100" width="400" height="300" rx="10" 
+            fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+      <rect x="320" y="120" width="360" height="260" rx="5" 
+            fill="#0f172a" stroke="#60a5fa" stroke-width="1"/>
+      
+      <!-- Updated Code Lines -->
+      <g transform="translate(340, 140)" font-family="monospace" font-size="13">
+        <!-- Title -->
+        <text y="0" fill="#60a5fa" fill-opacity="0.9">Technologies</text>
+        
+        <!-- Frontend -->
+        <text y="35">
+          <tspan fill="#E34F26" fill-opacity="0.9">HTML</tspan>
+          <tspan fill="#60a5fa"> • </tspan>
+          <tspan fill="#1572B6" fill-opacity="0.9">CSS</tspan>
+          <tspan fill="#60a5fa"> • </tspan>
+          <tspan fill="#F7DF1E" fill-opacity="0.9">JS</tspan>
+        </text>
+
+        <!-- Frameworks -->
+        <text y="70">
+          <tspan fill="#61DAFB" fill-opacity="0.9">React</tspan>
+          <tspan fill="#60a5fa"> • </tspan>
+          <tspan fill="#3178c6" fill-opacity="0.9">TypeScript</tspan>
+        </text>
+
+        <!-- Backend -->
+        <text y="105">
+          <tspan fill="#339933" fill-opacity="0.9">Node.js</tspan>
+          <tspan fill="#60a5fa"> • </tspan>
+          <tspan fill="#3776AB" fill-opacity="0.9">Python</tspan>
+        </text>
+
+        <!-- Database -->
+        <text y="140">
+          <tspan fill="#4DB33D" fill-opacity="0.9">MongoDB</tspan>
+          <tspan fill="#60a5fa"> • </tspan>
+          <tspan fill="#F29111" fill-opacity="0.9">MySQL</tspan>
+        </text>
+      </g>
+    </g>
+
+    <!-- Tech Stack Icons -->
+    <g>
+      <!-- React -->
+      <circle cx="200" cy="150" r="40" fill="none" stroke="#60a5fa" stroke-width="2">
+        <animate attributeName="stroke-opacity" values="0.2;0.8;0.2" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="200" cy="150" r="10" fill="#60a5fa"/>
+      
+      <!-- JavaScript -->
+      <rect x="750" y="200" width="60" height="60" fill="#eab308" fill-opacity="0.2" rx="10"/>
+      <text x="770" y="240" fill="#eab308" font-family="monospace" font-size="24" text-anchor="middle">JS</text>
+
+      <!-- TypeScript -->
+      <rect x="150" y="350" width="60" height="60" fill="#3178c6" fill-opacity="0.2" rx="10"/>
+      <text x="180" y="390" fill="#3178c6" font-family="monospace" font-size="24" text-anchor="middle">TS</text>
+      
+      <!-- Node.js -->
+      <circle cx="800" cy="350" r="35" fill="#4caf50" fill-opacity="0.2"/>
+      <path d="M785 350 l30 -20 v40 z" fill="#4caf50" fill-opacity="0.8"/>
+
+      <!-- Python -->
+      <g transform="translate(850, 150)">
+        <rect width="50" height="50" rx="10" fill="#3776AB" fill-opacity="0.2"/>
+        <text x="25" y="30" fill="#3776AB" font-family="monospace" font-size="20" text-anchor="middle">Py</text>
+      </g>
+
+      <!-- MongoDB -->
+      <g transform="translate(100, 250)">
+        <rect width="50" height="50" rx="10" fill="#4DB33D" fill-opacity="0.2"/>
+        <text x="25" y="30" fill="#4DB33D" font-family="monospace" font-size="20" text-anchor="middle">DB</text>
+      </g>
+
+      <!-- Git -->
+      <g transform="translate(900, 250)">
+        <rect width="50" height="50" rx="10" fill="#F05032" fill-opacity="0.2"/>
+        <text x="25" y="30" fill="#F05032" font-family="monospace" font-size="20" text-anchor="middle">Git</text>
+      </g>
+    </g>
+
+    <!-- Connection Lines -->
+    <g stroke="#3b82f6" stroke-width="1.5" stroke-opacity="0.4">
+      <path d="M200 150 Q300 150, 300 250">
+        <animate attributeName="stroke-opacity" values="0.2;0.6;0.2" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <path d="M750 230 Q600 250, 700 250">
+        <animate attributeName="stroke-opacity" values="0.2;0.6;0.2" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M180 350 Q300 350, 300 300">
+        <animate attributeName="stroke-opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite"/>
+      </path>
+      <path d="M800 350 Q600 350, 700 300">
+        <animate attributeName="stroke-opacity" values="0.2;0.6;0.2" dur="2.8s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Thought Bubbles -->
+    <g fill="#60a5fa" fill-opacity="0.2">
+      <circle cx="450" cy="100" r="10">
+        <animate attributeName="opacity" values="0.2;0.5;0.2" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="470" cy="80" r="8">
+        <animate attributeName="opacity" values="0.2;0.5;0.2" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="485" cy="65" r="6">
+        <animate attributeName="opacity" values="0.2;0.5;0.2" dur="3s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+
+  <!-- Floating Small Icons -->
+  <g>
+    <circle cx="150" cy="100" r="5" fill="#60a5fa">
+      <animate attributeName="opacity" values="0.2;0.8;0.2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="950" cy="400" r="5" fill="#60a5fa">
+      <animate attributeName="opacity" values="0.2;0.8;0.2" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="850" cy="200" r="5" fill="#60a5fa">
+      <animate attributeName="opacity" values="0.2;0.8;0.2" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Glow Effects -->
+  <circle cx="600" cy="300" r="400" fill="url(#glowGradient)">
+    <animate attributeName="opacity" values="0.3;0.6;0.3" dur="4s" repeatCount="indefinite"/>
+  </circle>
+</svg>
