@@ -43,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
               </li>
               <li className="relative group">
                 <a 
-                  href="/tutorials" 
+                  href="/courses" 
                   className="text-sm font-medium hover:text-blue-500 transition-colors flex items-center gap-1"
                 >
                  Courses
@@ -88,7 +88,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
                 }
               `}
             >
-              লগইন
+              Login
             </a>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import logo from '../../assets/light-mode-logo.svg';
 const InstructorProfile = ({ isDarkMode }: { isDarkMode: boolean }) => {
   return (
     <section className={`py-16 ${isDarkMode ? 'bg-darkMainBg' : 'bg-lightMainBg'}`}>
@@ -40,11 +40,11 @@ const InstructorProfile = ({ isDarkMode }: { isDarkMode: boolean }) => {
             {/* Trade License Info */}
             <div className="pt-4 flex items-center gap-2">
               <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                {/* <img 
-                  src="/api/placeholder/32/32"
+                <img 
+                  src={logo}
                   alt="Learn With Mahfuj mILogo"
                   className="w-5 h-5"
-                /> */}
+                />
               </div>
               <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                 Business Licence: MA312654/02
