@@ -51,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
               </li>
               <li>
                 <a 
-                  href="/about" 
+                  href="/membership" 
                   className="text-sm font-medium hover:text-blue-500 transition-colors"
                 >
                   Membership
