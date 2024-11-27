@@ -58,3 +58,5 @@ const InstructorProfile = ({ isDarkMode }: { isDarkMode: boolean }) => {
 };
 
 export default InstructorProfile;
+
+

@@ -6,6 +6,8 @@ import { useTheme } from "./theme";
 import Footer from "./components/Footer";
 import Courses from "./pages/Course";
 import ComingSoon from "./pages/ComingSoon";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const App: React.FC = () => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -19,6 +21,10 @@ const App: React.FC = () => {
             <Route path="/" element={<Home isDarkMode={isDarkMode} />} />
             <Route path="/courses" element={<Courses isDarkMode={isDarkMode} />} />
             <Route path="/membership" element={<ComingSoon isDarkMode={isDarkMode} />} />
+            <Route path="/login" element={<Login isDarkMode={isDarkMode} />} />
+            <Route path="/register" element={<Register isDarkMode={isDarkMode} />} />
+
+
             membership
           </Routes>
         </main>
