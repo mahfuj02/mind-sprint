@@ -8,15 +8,18 @@ import Courses from "./pages/Course";
 import ComingSoon from "./pages/ComingSoon";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-
+import { AuthProvider } from "./context/authContext";
 const App: React.FC = () => {
   const { isDarkMode, toggleTheme } = useTheme();
 
   return (
+    <AuthProvider>
+
     <Router>
       <div className={isDarkMode ? "dark" : ""}>
         <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
         <main className="bg-lightMainBg dark:bg-darkMainBg min-h-screen">
+
           <Routes>
             <Route path="/" element={<Home isDarkMode={isDarkMode} />} />
             <Route path="/courses" element={<Courses isDarkMode={isDarkMode} />} />
@@ -31,6 +34,7 @@ const App: React.FC = () => {
         <Footer isDarkMode={isDarkMode} />
       </div>
     </Router>
+    </AuthProvider>
   );
 };
 

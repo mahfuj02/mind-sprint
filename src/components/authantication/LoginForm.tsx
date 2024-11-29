@@ -1,43 +1,44 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
- interface LoginFormData {
-    email: string;
-    password: string;
-  }
-  
-   interface LoginFormProps {
-    isDarkMode: boolean;
-  }
+export interface LoginFormProps {
+  isDarkMode: boolean;
+  onSubmit: (email: string, password: string) => Promise<void>;
+  error: string | null;
+ }
 
-const LoginForm: React.FC<LoginFormProps> = ({ isDarkMode }) => {
-  const [formData, setFormData] = useState<LoginFormData>({
+ 
+ const LoginForm: React.FC<LoginFormProps> = ({ isDarkMode, onSubmit, error }) => {
+  const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
   const [isLoading, setIsLoading] = useState(false);
-
+ 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setIsLoading(false);
-    // Handle login logic here
+    try {
+      await onSubmit(formData.email, formData.password);
+    } catch (err) {
+      // Error will be handled by parent component
+    } finally {
+      setIsLoading(false);
+    }
   };
-
+ 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
   };
-
+ 
   return (
     <div className={`w-full max-w-md mx-auto p-8 rounded-2xl shadow-lg ${
       isDarkMode ? 'bg-darkHeaderFooter' : 'bg-lightHeaderFooter'
     }`}>
-      {/* Logo */}
       <div className="text-center mb-8">
         <h3 className={`text-2xl font-bold ${
           isDarkMode ? "text-textDark" : "text-textLight"
@@ -45,17 +46,20 @@ const LoginForm: React.FC<LoginFormProps> = ({ isDarkMode }) => {
           <span className="text-primary">mind</span>Sprint
         </h3>
       </div>
-
-      {/* Title */}
+ 
       <h2 className={`text-2xl font-bold mb-6 text-center ${
         isDarkMode ? "text-textDark" : "text-textLight"
       }`}>
         Welcome back
       </h2>
-
-      {/* Form */}
+ 
+      {error && (
+        <div className="mb-4 p-3 text-sm text-red-500 bg-red-100 rounded-lg">
+          {error}
+        </div>
+      )}
+ 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Email Field */}
         <div>
           <label 
             htmlFor="email" 
@@ -80,8 +84,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ isDarkMode }) => {
             placeholder="Enter your email"
           />
         </div>
-
-        {/* Password Field */}
+ 
         <div>
           <div className="flex justify-between items-center mb-2">
             <label 
@@ -114,8 +117,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ isDarkMode }) => {
             placeholder="Enter your password"
           />
         </div>
-
-        {/* Submit Button */}
+ 
         <button
           type="submit"
           disabled={isLoading}
@@ -149,8 +151,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ isDarkMode }) => {
           )}
         </button>
       </form>
-
-      {/* Register Link */}
+ 
       <p className={`mt-6 text-center text-sm ${
         isDarkMode ? "text-gray-400" : "text-gray-600"
       }`}>
@@ -164,6 +165,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ isDarkMode }) => {
       </p>
     </div>
   );
-};
-
-export default LoginForm;
+ };
+ 
+ export default LoginForm;

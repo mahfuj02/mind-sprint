@@ -1,75 +1,96 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/authContext';
 
-export interface RegisterFormData {
-    email: string;
-    password: string;
-    confirmPassword: string;
-  }
-  
-  export interface RegisterFormProps {
-    isDarkMode: boolean;
-  }
-  
-  // components/RegisterForm.tsx
+export interface RegisterFormProps {
+  isDarkMode: boolean;
+}
 
-  
-  const RegisterForm: React.FC<RegisterFormProps> = ({ isDarkMode }) => {
-    const [formData, setFormData] = useState<RegisterFormData>({
-      email: '',
-      password: '',
-      confirmPassword: ''
-    });
-    const [errors, setErrors] = useState<Partial<RegisterFormData>>({});
-    const [isLoading, setIsLoading] = useState(false);
-  
-    const validateForm = (): boolean => {
-      const newErrors: Partial<RegisterFormData> = {};
-      if (formData.password !== formData.confirmPassword) {
-        newErrors.confirmPassword = "Passwords don't match";
+const RegisterForm: React.FC<RegisterFormProps> = ({ isDarkMode }) => {
+  const navigate = useNavigate();
+  const { register, loading: isLoading, error } = useAuth();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+
+  const validateForm = (): boolean => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = "Passwords don't match";
+    if (formData.password.length < 6) newErrors.password = "Password must be at least 6 characters";
+    setValidationErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+    
+    try {
+      const response = await register(formData.name, formData.email, formData.password);
+      if (response?.status === 'success') {
+        navigate('/');
       }
-      if (formData.password.length < 6) {
-        newErrors.password = "Password must be at least 6 characters";
-      }
-      setErrors(newErrors);
-      return Object.keys(newErrors).length === 0;
-    };
-  
-    const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!validateForm()) return;
-      
-      setIsLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setIsLoading(false);
-    };
-  
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData(prev => ({
-        ...prev,
-        [e.target.name]: e.target.value
-      }));
-      setErrors({});
-    };
-  
-    return (
-      <div className={`w-full max-w-md mx-auto p-8 rounded-2xl shadow-lg ${
-        isDarkMode ? 'bg-darkHeaderFooter' : 'bg-lightHeaderFooter'
+    } catch (err) {
+      setValidationErrors({ email: error || 'Registration failed' });
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+    
+  };
+
+  return (
+    <div className={`w-full max-w-md mx-auto p-8 rounded-2xl shadow-lg ${
+      isDarkMode ? 'bg-darkHeaderFooter' : 'bg-lightHeaderFooter'
+    }`}>
+      <div className="text-center mb-8">
+        <h3 className={`text-2xl font-bold ${isDarkMode ? "text-textDark" : "text-textLight"}`}>
+          <span className="text-primary">mind</span>Sprint
+        </h3>
+      </div>
+
+      <h2 className={`text-2xl font-bold mb-6 text-center ${
+        isDarkMode ? "text-textDark" : "text-textLight"
       }`}>
-        <div className="text-center mb-8">
-          <h3 className={`text-2xl font-bold ${isDarkMode ? "text-textDark" : "text-textLight"}`}>
-            <span className="text-primary">mind</span>Sprint
-          </h3>
+        Create your account
+      </h2>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="name" className={`block text-sm font-medium mb-2 ${
+            isDarkMode ? "text-textDark" : "text-textLight"
+          }`}>
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className={`w-full px-4 py-3 rounded-lg border transition-colors ${
+              isDarkMode
+                ? "bg-darkMainBg text-textDark border-gray-700 focus:border-primary"
+                : "bg-white text-textLight border-gray-300 focus:border-primary"
+            }`}
+            placeholder="Enter your name"
+          />
         </div>
-  
-        <h2 className={`text-2xl font-bold mb-6 text-center ${
-          isDarkMode ? "text-textDark" : "text-textLight"
-        }`}>
-          Create your account
-        </h2>
-  
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+
+        {/* Email, Password, and ConfirmPassword fields remain unchanged */}
+        {/* Keep your existing input fields and button code */}
+
+        <div>
             <label htmlFor="email" className={`block text-sm font-medium mb-2 ${
               isDarkMode ? "text-textDark" : "text-textLight"
             }`}>
@@ -108,11 +129,11 @@ export interface RegisterFormData {
                 isDarkMode
                   ? "bg-darkMainBg text-textDark border-gray-700 focus:border-primary"
                   : "bg-white text-textLight border-gray-300 focus:border-primary"
-              } ${errors.password ? 'border-red-500' : ''}`}
+              } ${validationErrors.password ? 'border-red-500' : ''}`}
               placeholder="Create a password"
             />
-            {errors.password && (
-              <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+            {validationErrors.password && (
+              <p className="text-red-500 text-sm mt-1">{validationErrors.password}</p>
             )}
           </div>
   
@@ -133,11 +154,11 @@ export interface RegisterFormData {
                 isDarkMode
                   ? "bg-darkMainBg text-textDark border-gray-700 focus:border-primary"
                   : "bg-white text-textLight border-gray-300 focus:border-primary"
-              } ${errors.confirmPassword ? 'border-red-500' : ''}`}
+              } ${validationErrors.confirmPassword ? 'border-red-500' : ''}`}
               placeholder="Confirm your password"
             />
-            {errors.confirmPassword && (
-              <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>
+            {validationErrors.confirmPassword && (
+              <p className="text-red-500 text-sm mt-1">{validationErrors.confirmPassword}</p>
             )}
           </div>
   
@@ -162,17 +183,16 @@ export interface RegisterFormData {
               'Create Account'
             )}
           </button>
-        </form>
-  
-        <p className={`mt-6 text-center text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
-          Already have an account?{' '}
-          <Link to="/login" className="text-primary hover:text-primary/80 font-medium transition-colors">
-            Sign in
-          </Link>
-        </p>
-      </div>
-    );
-  };
+      </form>
 
+      <p className={`mt-6 text-center text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
+        Already have an account?{' '}
+        <Link to="/login" className="text-primary hover:text-primary/80 font-medium transition-colors">
+          Sign in
+        </Link>
+      </p>
+    </div>
+  );
+};
 
-  export default RegisterForm;
+export default RegisterForm;
