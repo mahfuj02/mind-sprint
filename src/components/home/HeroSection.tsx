@@ -1,6 +1,7 @@
 import React from 'react';
 import heroDark from '../../assets/hero-dark.svg';
 import heroLight from '../../assets/hero-light.svg';
+import { Link } from 'react-router-dom';
 
 interface HeaderProps {
   isDarkMode: boolean;
@@ -23,9 +24,11 @@ const HeroSection: React.FC<HeaderProps> = ({isDarkMode}) => {
           
           {/* Buttons */}
           <div className="mt-8 flex justify-center gap-4">
+          <Link to='courses'>
             <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 text-lg">
-              Start Learning
+            Start Learning
             </button>
+            </Link>
             <button className="bg-darkHeaderFooter border border-white hover:bg-white/10 text-white font-bold py-3 px-6 rounded-lg flex items-center space-x-2 transition duration-300 text-lg">
               <span>Watch Intro</span>
             </button>

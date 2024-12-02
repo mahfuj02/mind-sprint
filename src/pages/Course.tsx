@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import SearchBar from "../components/course/SearchBar";
 import SortingBox from "../components/course/SoritngBox";
 import CourseCard from "../components/course/CourseCard";
 import { useCourses } from "../hooks/useCourses";
+import React from "react";
 
 interface Props {
  isDarkMode: boolean;
@@ -12,11 +13,22 @@ const Courses = ({ isDarkMode }: Props) => {
  const [searchQuery, setSearchQuery] = useState('');
  const [sortBy, setSortBy] = useState('all');
  const { courses, loading, error } = useCourses();
+ const [selectedCategory, setSelectedCategory] = useState<string>('');
 
- const filteredCourses = courses.filter(course =>
-   course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-   course.description.toLowerCase().includes(searchQuery.toLowerCase())
- );
+ const filteredCourses = useMemo(() => {
+  return courses.filter(course => {
+    const matchesSearch = 
+      course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      course.description.toLowerCase().includes(searchQuery.toLowerCase());
+      
+    const matchesCategory = 
+      selectedCategory === '' || 
+      String(course.category_id) === selectedCategory;
+
+    return matchesSearch && matchesCategory;
+  });
+}, [courses, searchQuery, selectedCategory]); // Only recalculate when these values change
+
 
  if (loading) {
    return (
@@ -57,7 +69,8 @@ const Courses = ({ isDarkMode }: Props) => {
 
        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
          <SearchBar onSearch={setSearchQuery} isDarkMode={isDarkMode} />
-         <SortingBox onSort={setSortBy} isDarkMode={isDarkMode} />
+         <SortingBox onSort={(categoryId) => setSelectedCategory(categoryId)} 
+          isDarkMode={isDarkMode}  />
        </div>
 
        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

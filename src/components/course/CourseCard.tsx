@@ -11,9 +11,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 }) => {
     // Default image if media_url is null
     const defaultImage = "https://placehold.co/600x400/png";
-    console.log(course.media_url, course.id);
     const imageUrl = course.media_url ? decodeURIComponent(course.media_url.replace('\/', '//')) : 'https://placehold.co/600x400/png';
-    console.log(imageUrl)
 
     return (
         <div className={`relative overflow-hidden rounded-xl transition-all duration-300 hover:scale-105 ${
@@ -42,7 +40,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
                             <span className={`text-sm ${
                                 isDarkMode ? "text-gray-400" : "text-gray-600"
                             }`}>
-                                {course.duration}h
+                                {/* {course.duration}h */} 10:00h
                             </span>
                             <span className={`text-sm font-semibold ${
                                 isDarkMode ? "text-primary" : "text-primary"

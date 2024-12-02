@@ -1,9 +1,17 @@
+// components/SortingBox.tsx
 import React from 'react';
-interface Props{
-    onSort: (value: string) => void;
-    isDarkMode: boolean;
+import { useCategories } from '../../hooks/useCategories';
+
+interface Props {
+  onSort: (value: string) => void;
+  isDarkMode: boolean;
 }
+
 const SortingBox: React.FC<Props> = ({ onSort, isDarkMode }) => {
+  const { categories, loading } = useCategories();
+  console.log("categories ,", categories);
+  if (loading) return <div>Loading categories...</div>;
+
   return (
     <select 
       onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onSort(e.target.value)}
@@ -13,10 +21,12 @@ const SortingBox: React.FC<Props> = ({ onSort, isDarkMode }) => {
           : "bg-lightHeaderFooter text-textLight border-gray-300 focus:border-darkHeaderFooter"
       }`}
     >
-      <option value="all">All Courses</option>
-      <option value="popular">Most Popular</option>
-      <option value="newest">Newest</option>
-      <option value="duration">Duration</option>
+      <option value="">All Courses</option>
+      {categories.map(category => (
+        <option key={category.id} value={category.id}>
+          {category.name}
+        </option>
+      ))}
     </select>
   );
 };
